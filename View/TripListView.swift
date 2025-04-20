@@ -15,11 +15,9 @@ struct TripListView : View {
     @State var showAddAdventureView : Bool = false
     @State var showMapView : Bool = false
     
-    func deleteItems(offsets: IndexSet) {
-        for index in offsets {
-            
+    func deleteAdventure(at offsets: IndexSet) {
+            adventures.adventures.remove(atOffsets: offsets)
         }
-    }
 
     var body: some View {
         NavigationStack {
@@ -45,11 +43,15 @@ struct TripListView : View {
                                         .padding()
                                     }
                     }
+                    .onDelete(perform: deleteAdventure)
                 }
                 Spacer()
                 Button("Add", action: {
                     showAddAdventureView = true
                 })
+            }
+            .toolbar {
+                EditButton()
             }
             .sheet(isPresented: $showAddAdventureView) {
                 AddAdventureView(adventures: adventures)

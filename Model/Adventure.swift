@@ -9,11 +9,12 @@ import Foundation
 import SwiftData
 
 
-struct Adventure {
+struct Adventure : Identifiable {
     var adventureName : String
     var TripList : [Trip]
     var startDate: Date
     var endDate: Date
+    var description: String
     var id = UUID()
     
     mutating func addTripToAdventure(_ name : String,_ location : TripLocation, _ description : String) {

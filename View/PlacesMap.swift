@@ -66,7 +66,7 @@ struct PlacesMapView: View {
         .sheet(isPresented: $showingPlaceDetails) {
             if let selectedPlace = viewModel.selectedPlace {
                 PlaceDetailView(place: selectedPlace, location: $location)
-            }            
+            }
         }
         .onAppear {
             viewModel.region = region

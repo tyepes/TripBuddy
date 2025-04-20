@@ -63,9 +63,9 @@ struct MapView: View {
                 ToolbarItem(placement: .bottomBar) {
                     HStack {
                         Button {
-                            dismiss()
+                            showEditTripSheet = true
                         } label: {
-                                Text("Test")
+                                Text("History")
                         }
                         Button {
                             showAddTripSheet = true
@@ -84,54 +84,13 @@ struct MapView: View {
             .sheet(isPresented: $showAddTripSheet) {
                 AddTripView(viewModel: viewModel, region: $viewModel.region)
             }
+            .sheet(isPresented: $showEditTripSheet) {
+                    TripDetailView(viewModel: viewModel)
+            }
         }
     }
 }
 
 
-#Preview {
-    let sampleTrip = Trip(
-        name: "Hiking Adventure",
-        location: TripLocation(
-            name: "McDowell Mountain",
-            coordinate: CLLocationCoordinate2D(latitude: 33.651, longitude: -111.933)
-        ),
-        description: "Exploring the trails at McDowell Mountain."
-    )
-    let desertTrip = Trip(
-            name: "Desert Camping",
-            location: TripLocation(
-                name: "Sonoran Desert",
-                coordinate: CLLocationCoordinate2D(latitude: 33.4484, longitude: -112.0740)
-            ),
-            description: "A quiet night under the stars in the desert."
-        )
-    
-    let island = Trip(
-            name: "Desert Camping",
-            location: TripLocation(
-                name: "Sonoran Desert",
-                coordinate: CLLocationCoordinate2D(latitude: 32.4484, longitude: -112.0740)
-            ),
-            description: "A quiet night under the stars in the desert."
-        )
-    
 
-
-    let sampleAdventure = Adventure(
-        adventureName: "Arizona Trip",
-        TripList: [sampleTrip, desertTrip, island],
-        startDate: Date(),
-        endDate: Calendar.current.date(byAdding: .day, value: 3, to: Date())!
-    )
-
-    let viewModel = MapModelView(adventure: sampleAdventure)
-
-    return MapView(
-        currentAdventure: sampleAdventure,
-        viewModel: viewModel,
-        markers: viewModel.markers,
-        searchText: ""
-    )
-}
 
